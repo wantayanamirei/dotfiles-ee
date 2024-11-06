@@ -1,0 +1,212 @@
+{
+	"layer": "top",
+	"position": "top",
+	"modules-left": [
+		"custom/themeA",
+		"custom/themeB",
+		"custom/themeC",
+		"hyprland/workspaces",
+		"cpu",
+		"temperature",
+		"tray",
+		"hyprland/window"
+	],
+	"modules-center": [
+		"custom/song-previous",
+		"custom/mpris-media",
+		"custom/song-toggle",
+		"custom/song-next"
+	],
+	"modules-right": [
+		"clock",
+		"custom/weather",
+		"network",
+		"pulseaudio",
+		"backlight",
+		"battery",
+		"custom/power-menu",
+	],
+	"hyprland/workspaces": {
+	   	"format": "<span font='Font Awesome 6 Free' font_weight='bold' size='large' rise='-2pt'>{icon}</span>",
+	    "on-scroll-up": "hyprctl dispatch workspace e+1",
+	    "on-scroll-down": "hyprctl dispatch workspace e-1",
+	    "smooth-scrolling-threshold": 1,
+        "on-click": "activate",
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "10": "10",
+        	"urgent": "",
+            // "active": "",
+            // "default": ""
+        	},
+        "sort by number": true,
+	},
+	"hyprland/window": {
+	    "format": "{}",
+	    "separate-outputs": true,
+	    "max-length": 18
+	},
+	"cpu": {
+		"interval": 1,
+		"format": "<span font='Font Awesome 6 Free' font_weight='bold' size='large' rise='-2pt'>&#xf2db;</span> <span font_weight='bold'>{usage}%</span>",
+		"tooltip": false,
+		"on-click": "kitty bpytop"
+	},
+	"temperature": {
+		// "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "format-icons": ["", "", ""],
+        "critical-threshold": 75,
+		"interval": 1,
+		"format": "<span font='Font Awesome 6 Free' font_weight='bold' size='large' rise='0pt'>{icon}</span> <span font_weight='bold'>{temperatureC}°C</span>",
+		"tooltip": false,
+		"on-click": "kitty bpytop",
+	},
+	"clock": {
+		"format": "<span font_weight='bold'>{:%H:%M %p | %A %d %b} </span>",
+		"tooltip": false,
+	},
+	"network": {
+		"interval": 1,
+		"format-ethernet": "<span font='Font Awesome 6 {icon}' font_weight='bold' size='large' rise='-2pt'>&#xf796;</span> {ifname}",
+		"format-wifi": "<span font='Font Awesome 6 Free' font_weight='bold' size='medium' rise='0pt'>&#xf1eb;</span> {essid}",
+		"format-linked": "<span font='Font Awesome 6 Free' font_weight='bold' size='large' rise='-2pt'>&#xf0c1;</span> {essid} (No IP)",
+		"format-disconnected": "<span font='Font Awesome 6 Free' font_weight='bold' size='large' rise='-2pt'></span> No Internet",
+		"format-disabled": "<span font='Font Awesome 6 Free' font_weight='bold' size='large' rise='-2pt'>&#xf7a9;</span> Networking Off",
+		"on-click": "sh ~/.config/rofi/bin/network",
+		"max-length": 30,
+		"tooltip": false
+	},
+	"pulseaudio": {
+		"format": "<span font='Font Awesome 6 Free' font_weight='bold' size='large' rise='-2pt'>{icon} </span><span font_weight='bold'>{volume}%</span>",
+		"format-muted": "<span font='Font Awesome 6 Free' font_weight='bold' size='large' rise='-2pt'>&#xf6a9;</span> <span font_weight='bold'>Muted</span>",
+		"format-icons": {
+			"default": ["", "", ""]
+		},
+		"states": {
+			"normal": 30,
+			"warning": 90,
+			"critical": 150
+		},
+		"scroll-step": 5,
+		"on-click": "pavucontrol",
+		"smooth-scrolling-threshold": 3,
+		"tooltip": false
+	},
+	"backlight": {
+		"format": "<span font='Font Awesome 6 Free' font_weight='bold' size='large' rise='-2pt'>{icon} </span> <span font_weight='bold'>{percent}%</span>",
+		"format-icons": ["", "", "", "", "", "", "", "", ""],
+		"states": {
+			"normal": 25,
+			"warning": 50,
+			"critical": 90
+		},
+		"on-click": "hyprshade toggle blue-light-filter-custom",
+		"on-click-right": "hyprshade toggle vibrance-custom", 
+		"scroll-step": 5,
+		"smooth-scrolling-threshold": 3,
+		"tooltip": false
+	},
+	"battery": {
+		"states": {
+			"warning": 20,
+			"critical": 10
+		},
+		"format": "<span font='Font Awesome 6 Free' font_weight='bold' size='large' rise='-2pt'>{icon}</span> <span font_weight='bold'>{capacity}%</span>",
+		"format-icons": ["", "", "", "", ""],
+		"format-charging": "<span font='Font Awesome 6 Free' font_weight='bold' size='large' rise='2pt'></span> <span font_weight='bold' rise='2pt'>{capacity}%</span>",
+		"tooltip": false,
+	},
+	"tray": {
+	        "icon-size": 20,
+	        "tooltip": false,
+	        "spacing": 8
+    },
+    "custom/weather" : {
+        "format" : "| {}",
+        "on-click": "~/.config/waybar/scripts/launch_weather.sh",
+        "interval" : 300,
+        "exec" : "python3 ~/.config/waybar/scripts/weather.py",
+        "return-type" : "json"
+    },
+  	"custom/power-menu": {
+  		"format": "<span font='Font Awesome 6 Free' size='large' font_weight='bold' rise='-2pt'>&#xf011;</span>",
+  		"tooltip": false,
+  		"on-click": "sh ~/.config/rofi/bin/powermenu"
+  	},
+  	"custom/mpris-media":{ 
+  		"format": "{}",
+  		"return-type": "json",
+	    "max-length": 50,
+	    "exec": "playerctl --follow --player=io.github.nate_xyz.Resonance,com,spotify,%any metadata --format '{\"text\": \"{{title}} - {{artist}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}} - {{artist}}\", \"alt\": \"{{playerName}}\", \"class\": \"{{playerName}}\"}'",
+	    "tooltip": true,
+	    "on-click": "~/.config/waybar/scripts/get-media-player.sh"
+  	},
+  	"custom/song-next": {
+  		"format": "<span font='Font Awesome 6 Free' size='large' font_weight='bold' rise='-2pt'>{icon}</span>",
+  		"on-click": "playerctl next",
+  		"tooltip": false,
+  		"format-icons": {
+  			"Playing": "&#xf04e;",
+  			"Paused": "&#xf04e;",	
+  		},
+  		"exec": "playerctl --follow --player=io.github.nate_xyz.Resonance,io.bassi.Amberol,spotify,%any metadata --format '{\"alt\": \"{{status}}\", \"class\": \"{{status}}\"}'",
+  		"return-type": "json"
+  	},
+  	"custom/song-previous": {
+  		"format": "<span font='Font Awesome 6 Free' size='large' font_weight='bold' rise='-2pt'>{icon}</span>",
+  		"on-click": "playerctl previous",
+  		"tooltip": false,
+  		"format-icons": {
+  			"Playing": "&#xf04a;",
+  			"Paused": "&#xf04a;",
+  		},
+  		"exec": "playerctl --follow --player=io.github.nate_xyz.Resonance,io.bassi.Amberol,spotify,%any metadata --format '{\"alt\": \"{{status}}\", \"class\": \"{{status}}\"}'",
+		"return-type": "json"
+  	},
+  	"custom/song-toggle": {
+  		"format": "{icon}",
+  		"on-click": "playerctl --player=io.github.nate_xyz.Resonance,io.bassi.Amberol,spotify,%any,firefox play-pause",
+		"tooltip": false,
+		"format-icons": {
+		        "Paused": "<span font='Font Awesome 6 Free' rise='-1pt' font_weight='bold'>&#xf04b;</span>",
+		        "Playing": "<span font='Font Awesome 6 Free' rise='-1pt' size='large' font_weight='bold'>&#xf04c;</span>",
+		},
+		"exec": "playerctl --follow --player=io.github.nate_xyz.Resonance,io.bassi.Amberol,spotify,%any metadata --format '{\"alt\": \"{{status}}\", \"class\": \"{{status}}\"}'",
+		"return-type": "json"
+  	},
+  	"custom/recording": {
+  		"format": "{icon}",
+		"return-type": "json",
+		"tooltip": false,
+		"format-icons": {
+		        "Running": "<span font='Font Awesome 6 Free' rise='-1pt' size='large' font_weight='bold'>&#xe132;</span>",
+		},
+		"interval": 1,
+		"exec": "~/.config/waybar/scripts/recording.sh",		
+  		"on-click": "~/.config/waybar/scripts/stop-recording.sh"
+  	},
+  	"custom/themeA": {
+  		"format": "<span font='Font Awesome 6 Free' size='small' font_weight='bold' rise='-2pt'>R</span>",
+  		"tooltip": false,
+  		"on-click": "sh ~/.config/hypr/scripts/themeA.sh"
+  	},
+  	"custom/themeB": {
+  		"format": "<span font='Font Awesome 6 Free' size='small' font_weight='bold' rise='-2pt'>G</span>",
+  		"tooltip": false,
+  		"on-click": "sh ~/.config/hypr/scripts/themeB.sh"
+  	},
+  	"custom/themeC": {
+  		"format": "<span font='Font Awesome 6 Free' size='small' font_weight='bold' rise='-2pt'>B</span>",
+  		"tooltip": false,
+  		"on-click": "sh ~/.config/hypr/scripts/themeC.sh"
+  	}
+}
