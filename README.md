@@ -1,3 +1,4 @@
 # dotfiles-ee
 Dotfiles for Hyprland
-Inspired by @kaii-lb
+Inspired by @kaii
+
